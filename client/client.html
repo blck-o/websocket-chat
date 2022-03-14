@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>chat</title>
+</head>
+
+<body>
+<h1>CHAT:</h1>
+
+<input id="username" name="username" type="text">
+
+<input onclick="connect()" type="button" value="connect">
+<input onclick="disconnect()" type="button" value="disconnect">
+
+<div id="container" style="text-align: center;">
+</div>
+
+<input id="message-text" name="msg" type="text">
+
+<input onclick="sendMessage()" type="button" value="send">
+
+<input onclick="prune()" type="button" value="prune">
+
+<script>
+        var holder = document.getElementById("container")
+        var socketUrl = "ws://localhost:8080/chat/"
+        var socket
+
+        function connect() {
+            var inputUsername = document.getElementById("username").value
+            socket = new WebSocket(socketUrl + inputUsername.trim())
+            socket.onopen = () => {
+                console.log("opened")
+                console.log("message sent")
+            }
+
+            socket.onmessage = msg => {
+                console.log(msg)
+                holder.innerHTML += msg.data + "<br>"
+            }
+
+            socket.onclose = () => socket = undefined
+        }
+
+        function disconnect() {
+            socket.close()
+        }
+
+        function sendMessage() {
+            var inputMsg = document.getElementById("message-text").value
+            socket.send(inputMsg)
+        }
+
+        function prune() {
+            holder.innerHTML = ""
+        }
+
+</script>
+</body>
+
+</html>
