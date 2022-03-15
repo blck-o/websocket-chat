@@ -4,24 +4,52 @@
 <head>
   <meta charset="UTF-8">
   <title>chat</title>
+  <style>
+    #container {
+      text-align: center;
+      max-height: 40em;
+      overflow-y: auto;
+      margin: 30px 0;
+      -webkit-box-shadow: 7px -5px 10px 0 #4B0082, 11px -9px 10px 0 #0000FF, 16px -14px 10px 0 #00FF00, 20px -17px 10px 0 #FFFF00, 24px -19px 10px 0 #FF7F00, 27px -23px 10px 0 #FF0000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
+      box-shadow: 7px -5px 10px 0 #4B0082, 11px -9px 10px 0 #0000FF, 16px -14px 10px 0 #00FF00, 20px -17px 10px 0 #FFFF00, 24px -19px 10px 0 #FF7F00, 27px -23px 10px 0 #FF0000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
+    }
+
+    .input-box {
+      padding: .7em;
+      border: 5px darkred dotted;
+    }
+
+    @media screen and (min-width: 900px) {
+      #container {
+        width: 70%;
+      }
+
+      .input-box {
+        width: 70%;
+      }
+    }
+  </style>
 </head>
 
 <body>
 <h1>CHAT:</h1>
 
-<input id="username" name="username" type="text">
-
-<input onclick="connect()" type="button" value="connect">
-<input onclick="disconnect()" type="button" value="disconnect">
-
-<div id="container" style="text-align: center;">
+<div class="input-box">
+  <label for="username">username: </label><input id="username" name="username" type="text">
+  <br>
+  <input onclick="connect()" type="button" value="connect">
+  <input onclick="disconnect()" type="button" value="disconnect">
 </div>
 
-<input id="message-text" name="msg" type="text">
+<div id="container">
+</div>
 
-<input onclick="sendMessage()" type="button" value="send">
-
-<input onclick="prune()" type="button" value="prune">
+<div class="input-box">
+  <label for="message-text">message: </label><input id="message-text" name="msg" type="text">
+  <br>
+  <input onclick="sendMessage()" type="button" value="send">
+  <input onclick="prune()" type="button" value="prune">
+</div>
 
 <script>
         var holder = document.getElementById("container")
